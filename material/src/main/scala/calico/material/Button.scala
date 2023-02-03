@@ -29,24 +29,22 @@ object Button:
 
 opaque type FilledButton[F[_]] <: Button[F] = Button[F]
 object FilledButton:
-  @inline private[material] def apply[F[_]]: FilledButton[F[_]] =
-    Raw().asInstanceOf[FilledButton[F]]
-
-  @JSImport("@material/web/button/filled-button.js")
   @js.native
-  private class Raw extends js.Object
+  @JSImport("@material/web/button/filled-button.js")
+  private[material] def use: Any = js.native
 
 opaque type OutlinedButton[F[_]] <: Button[F] = Button[F]
 object OutlinedButton:
-  @inline private[material] def apply[F[_]]: OutlinedButton[F[_]] =
-    Raw().asInstanceOf[OutlinedButton[F]]
-
-  @JSImport("@material/web/button/outlined-button.js")
   @js.native
-  private class Raw extends js.Object
+  @JSImport("@material/web/button/outlined-button.js")
+  private[material] def use: Any = js.native
 
 private trait MaterialButton[F[_]](using F: Async[F]):
 
-  def mdFilledButton: MdTag[F, FilledButton[F]] = MdTag(FilledButton[F])
+  lazy val mdFilledButton: MdTag[F, FilledButton[F]] =
+    FilledButton.use
+    MdTag("md-filled-button")
 
-  def mdOutlinedButton: MdTag[F, OutlinedButton[F]] = MdTag(OutlinedButton[F])
+  lazy val mdOutlinedButton: MdTag[F, OutlinedButton[F]] =
+    OutlinedButton.use
+    MdTag("md-outlined-button")

@@ -28,12 +28,12 @@ object Checkbox:
   extension [F[_]](checkbox: Checkbox[F])
     def checked: Prop[F, Boolean, Boolean] = Prop("checked", identity)
 
-  @inline private[material] def apply[F[_]]: Checkbox[F[_]] = Raw().asInstanceOf[Checkbox[F]]
-
-  @JSImport("@material/web/checkbox/checkbox.js")
   @js.native
-  private class Raw extends js.Object
+  @JSImport("@material/web/checkbox/checkbox.js")
+  private[material] def use: Any = js.native
 
 private trait MaterialCheckbox[F[_]](using F: Async[F]):
 
-  def mdCheckbox: MdTag[F, Checkbox[F]] = MdTag(Checkbox[F])
+  lazy val mdCheckbox: MdTag[F, Checkbox[F]] =
+    val _ = Checkbox.use
+    MdTag("md-checkbox")

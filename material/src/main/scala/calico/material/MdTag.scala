@@ -24,7 +24,7 @@ import cats.syntax.all.*
 import org.scalajs.dom
 import shapeless3.deriving.K0
 
-final class MdTag[F[_], E] private[material] (builder: => E)(using F: Async[F]):
+final class MdTag[F[_], E] private[material] (name: String)(using F: Async[F]):
 
   def apply[M](mkModifier: E => M)(using M: Modifier[F, E, M]): Resource[F, E] =
     build.toResource.flatTap(e => M.modify(mkModifier(e), e))
@@ -38,4 +38,4 @@ final class MdTag[F[_], E] private[material] (builder: => E)(using F: Async[F]):
       }
     }
 
-  private def build = F.delay(builder)
+  private def build = F.delay(dom.document.createElement(name).asInstanceOf[E])

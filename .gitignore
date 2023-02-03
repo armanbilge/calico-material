@@ -17,3 +17,5 @@ tags
 .bloop/
 metals.sbt
 .vscode
+
+node_modules/
