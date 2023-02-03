@@ -38,6 +38,6 @@ lazy val sandbox = project
     Compile / fastLinkJS / scalaJSLinkerConfig ~= {
       import org.scalajs.linker.interface.ModuleSplitStyle
       _.withModuleKind(ModuleKind.ESModule)
-        .withModuleSplitStyle(ModuleSplitStyle.SmallModulesFor(List("chaliyan")))
+        .withModuleSplitStyle(ModuleSplitStyle.SmallModulesFor(List("calico.material")))
     },
   )
