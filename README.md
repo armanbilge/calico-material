@@ -1,5 +1,6 @@
-# chaliyan
-calico material
+# calico-material
+
+[Material](https://m3.material.io/) components for [Calico](https://armanbilge.github.io/calico).
 
 ### Demo
 

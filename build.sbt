@@ -17,13 +17,13 @@ ThisBuild / tlJdkRelease := Some(8)
 
 val CalicoVersion = "0.2.0-M2"
 
-lazy val root = tlCrossRootProject.aggregate(chaliyan, sandbox)
+lazy val root = tlCrossRootProject.aggregate(material, sandbox)
 
-lazy val chaliyan = project
+lazy val material = project
   .in(file("material"))
   .enablePlugins(ScalaJSPlugin)
   .settings(
-    name := "chaliyan",
+    name := "calico-material",
     libraryDependencies ++= Seq(
       "com.armanbilge" %%% "calico" % CalicoVersion,
     ),
@@ -32,7 +32,7 @@ lazy val chaliyan = project
 lazy val sandbox = project
   .in(file("sandbox"))
   .enablePlugins(ScalaJSPlugin, NoPublishPlugin)
-  .dependsOn(chaliyan)
+  .dependsOn(material)
   .settings(
     scalaJSUseMainModuleInitializer := true,
     Compile / fastLinkJS / scalaJSLinkerConfig ~= {
