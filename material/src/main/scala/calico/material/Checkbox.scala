@@ -24,8 +24,11 @@ import scala.scalajs.js.annotation.JSImport
 
 opaque type Checkbox[F[_]] <: fs2.dom.HtmlElement[F] = fs2.dom.HtmlElement[F]
 
-private object Checkbox:
-  @inline def apply[F[_]]: Checkbox[F[_]] = Raw().asInstanceOf[Checkbox[F]]
+object Checkbox:
+  extension [F[_]](checkbox: Checkbox[F])
+    def checked: Prop[F, Boolean, Boolean] = Prop("checked", identity)
+
+  @inline private[material] def apply[F[_]]: Checkbox[F[_]] = Raw().asInstanceOf[Checkbox[F]]
 
   @JSImport("@material/web/checkbox/checkbox.js")
   @js.native
@@ -34,6 +37,3 @@ private object Checkbox:
 private trait MaterialCheckbox[F[_]](using F: Async[F]):
 
   def mdCheckbox: MdTag[F, Checkbox[F]] = MdTag(Checkbox[F])
-
-  extension (checkbox: Checkbox[F])
-    def checked: Prop[F, Boolean, Boolean] = Prop("checked", identity)

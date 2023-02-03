@@ -23,18 +23,23 @@ import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
 
 opaque type Button[F[_]] <: fs2.dom.HtmlElement[F] = fs2.dom.HtmlElement[F]
+object Button:
+  extension [F[_]](button: Button[F])
+    def label: Prop[F, String, String] = Prop("label", identity)
 
 opaque type FilledButton[F[_]] <: Button[F] = Button[F]
-private object FilledButton:
-  @inline def apply[F[_]]: FilledButton[F[_]] = Raw().asInstanceOf[FilledButton[F]]
+object FilledButton:
+  @inline private[material] def apply[F[_]]: FilledButton[F[_]] =
+    Raw().asInstanceOf[FilledButton[F]]
 
   @JSImport("@material/web/button/filled-button.js")
   @js.native
   private class Raw extends js.Object
 
 opaque type OutlinedButton[F[_]] <: Button[F] = Button[F]
-private object OutlinedButton:
-  @inline def apply[F[_]]: OutlinedButton[F[_]] = Raw().asInstanceOf[OutlinedButton[F]]
+object OutlinedButton:
+  @inline private[material] def apply[F[_]]: OutlinedButton[F[_]] =
+    Raw().asInstanceOf[OutlinedButton[F]]
 
   @JSImport("@material/web/button/outlined-button.js")
   @js.native
@@ -45,5 +50,3 @@ private trait MaterialButton[F[_]](using F: Async[F]):
   def mdFilledButton: MdTag[F, FilledButton[F]] = MdTag(FilledButton[F])
 
   def mdOutlinedButton: MdTag[F, OutlinedButton[F]] = MdTag(OutlinedButton[F])
-
-  extension (button: Button[F]) def label: Prop[F, String, String] = Prop("label", identity)
