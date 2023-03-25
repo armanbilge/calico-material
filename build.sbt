@@ -37,7 +37,10 @@ lazy val sandbox = project
     scalaJSUseMainModuleInitializer := true,
     Compile / scalaJSImportMap := { (s: String) =>
       if (s.startsWith("@material/web"))
-        "https://cdn.jsdelivr.net/npm/" + s + "/+esm"
+        s.replace(
+          "@material/web",
+          "https://www.unpkg.com/@material/web@1.0.0-pre.5/",
+        ) + "?module"
       else
         s
     },
