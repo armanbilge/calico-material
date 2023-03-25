@@ -6,5 +6,5 @@
 
 ```
 $ sbt sandbox/fastLinkJS
-$ npx vite # navigate to http://127.0.0.1:5173/sandbox/
+$ python -m http.server # navigate to http://localhost:8000/sandbox/
 ```
