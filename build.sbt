@@ -31,10 +31,16 @@ lazy val material = project
 
 lazy val sandbox = project
   .in(file("sandbox"))
-  .enablePlugins(ScalaJSPlugin, NoPublishPlugin)
+  .enablePlugins(ScalaJSPlugin, ScalaJSImportMapPlugin, NoPublishPlugin)
   .dependsOn(material)
   .settings(
     scalaJSUseMainModuleInitializer := true,
+    Compile / scalaJSImportMap := { (s: String) =>
+      if (s.startsWith("@material/web"))
+        "https://cdn.jsdelivr.net/npm/" + s + "/+esm"
+      else
+        s
+    },
     Compile / fastLinkJS / scalaJSLinkerConfig ~= {
       import org.scalajs.linker.interface.ModuleSplitStyle
       _.withModuleKind(ModuleKind.ESModule)
