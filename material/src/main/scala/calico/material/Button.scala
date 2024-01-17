@@ -16,7 +16,6 @@
 
 package calico.material
 
-import calico.html.Prop
 import cats.effect.kernel.Async
 
 import scala.scalajs.js
