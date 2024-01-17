@@ -23,9 +23,7 @@ import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
 
 opaque type Button[F[_]] <: fs2.dom.HtmlElement[F] = fs2.dom.HtmlElement[F]
-object Button:
-  extension [F[_]](button: Button[F])
-    def label: Prop[F, String, String] = Prop("label", identity)
+object Button
 
 opaque type FilledButton[F[_]] <: Button[F] = Button[F]
 object FilledButton:

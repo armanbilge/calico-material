@@ -7,15 +7,13 @@ ThisBuild / developers := List(
   tlGitHubDev("armanbilge", "Arman Bilge"),
 )
 
-ThisBuild / tlSonatypeUseLegacyHost := false
-
-ThisBuild / crossScalaVersions := Seq("3.2.2")
+ThisBuild / crossScalaVersions := Seq("3.3.1")
 ThisBuild / scalacOptions ++= Seq("-new-syntax", "-indent", "-source:future")
 
-ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec.temurin("17"))
+ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec.temurin("21"))
 ThisBuild / tlJdkRelease := Some(8)
 
-val CalicoVersion = "0.2.0-M2"
+val CalicoVersion = "0.2.2"
 
 lazy val root = tlCrossRootProject.aggregate(material, sandbox)
 
@@ -39,7 +37,7 @@ lazy val sandbox = project
       if (s.startsWith("@material/web"))
         s.replace(
           "@material/web",
-          "https://www.unpkg.com/@material/web@1.0.0-pre.5/",
+          "https://www.unpkg.com/@material/web@1.0.0-pre.16/",
         ) + "?module"
       else
         s

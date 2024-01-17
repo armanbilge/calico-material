@@ -29,9 +29,9 @@ object Demo extends IOWebApp:
       },
     ),
     mdOutlinedButton { b =>
-      b.label := "Back"
+      "Back"
     },
     mdFilledButton { b =>
-      b.label := "Next"
+      "Next"
     },
   )
