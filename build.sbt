@@ -32,6 +32,7 @@ lazy val sandbox = project
   .enablePlugins(ScalaJSPlugin, ScalaJSImportMapPlugin, NoPublishPlugin)
   .dependsOn(material)
   .settings(
+    tlFatalWarnings := false,
     scalaJSUseMainModuleInitializer := true,
     Compile / scalaJSImportMap := { (s: String) =>
       if (s.startsWith("@material/web"))
