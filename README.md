@@ -5,27 +5,6 @@ This library allows developers to use Google's **Material Design** components in
 
 ---
 
-## 📦 Installation  
-
-Add the following dependency to your **`build.sbt`** file:  
-
-```scala
-libraryDependencies += "com.armanbilge" %%% "calico-material" % "0.1.0"
-```
-
-# 🚀 Getting Started
-To use a Material button in your Scala.js project:
-
-```
-import calico.material.MaterialButton
-import cats.effect.IO
-import com.raquo.laminar.api.L._
-import calico.html.io._
-
-val myButton = MaterialButton("Click Me", IO(println("Button Clicked!")))
-
-render(document.body, myButton)
-```
 
 This will render a Material-styled button that logs "Button Clicked!" to the console when clicked.
 
@@ -35,8 +14,9 @@ To explore the available Material components:
 Build the Sandbox Demo:
 ```
 sbt sandbox/fastLinkJS
-Start a Local Server:
 ```
+Start a Local Server:
+
 ```
 python -m http.server
 ```
@@ -49,10 +29,11 @@ We welcome contributions! If you'd like to add a new Material component:
 
 ***Fork & Clone the repository.***
 
+```
 git clone https://github.com/armanbilge/calico-material.git
 cd calico-material
+```
 Create a New Branch:
-
 
 ```
 git checkout -b feature-new-component
