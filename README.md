@@ -6,7 +6,6 @@ This library allows developers to use Google's **Material Design** components in
 ---
 
 
-This will render a Material-styled button that logs "Button Clicked!" to the console when clicked.
 
 # 🛠 Running the Demo
 To explore the available Material components:
