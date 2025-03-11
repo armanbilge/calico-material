@@ -24,7 +24,8 @@ Navigate to ```http://localhost:8000/sandbox/``` to see the components in action
 
 
 # 🎯 Contribution Guide
-We welcome contributions! If you'd like to add a new Material component:
+
+### We welcome contributions! If you'd like to add a new Material component:
 
 ***Fork & Clone the repository.***
 
