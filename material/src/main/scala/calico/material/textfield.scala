@@ -37,4 +37,3 @@ object TextField:
   def mdTextField[F[_]: Async]: MdTag[F, TextField[F]] =
     val _ = MaterialTextFieldJS
     MdTag("md-filled-text-field")
-
