@@ -14,37 +14,28 @@
  * limitations under the License.
  */
 
-package calico
-package material
+package calico.material
 import cats.effect.IO
-import calico.html.io.{*, given}
-import calico.material.io.{*, given}
 
-object Demo extends IOWebApp:
-  def render = div(
-  label(
-    "Material 3",
-    mdCheckbox { cb =>
-      cb.checked := true
-    },
-  ),
-  label(
-    "Select Option",
-    Radio.mdRadio[IO] { r =>  // Pass IO explicitly
-      r.checked := true
-    },
-  ),
-  label(
-    "Enter Text",
-    TextField.mdTextField[IO] { tf =>  // Pass IO explicitly
-      tf.value := "Hello"
-    },
-  ),
-  mdOutlinedButton { b =>
-    "Back"
-  },
-  mdFilledButton { b =>
-    "Next"
-  }
-)
+import calico.html.Prop
+import cats.effect.kernel.Async
+
+import scala.scalajs.js
+import scala.scalajs.js.annotation.JSImport
+
+opaque type Radio[F[_]] <: fs2.dom.HtmlElement[F] = fs2.dom.HtmlElement[F]
+
+object Radio:
+  extension [F[_]](radio: Radio[F])
+    def checked: Prop[F, Boolean, Boolean] = Prop("checked", identity)
+
+  @js.native
+  @JSImport("@material/web/radio/radio.js")
+  private[material] def use: Any = js.native
+
+  def mdRadio[F[_]](using F: Async[F]): MdTag[F, Radio[F]] =
+    val _ = use
+    MdTag("md-radio")
+
+
 
