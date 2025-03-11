@@ -29,11 +29,9 @@ object Demo extends IOWebApp:
         cb.checked := true
       },
     ),
-
     mdOutlinedButton { b =>
       "Back"
     },
-    
     mdFilledButton { b =>
       "Next"
     },
@@ -44,5 +42,5 @@ object Demo extends IOWebApp:
         s.max := 100
         s.value := 50
       },
-  )
+    ),
   )

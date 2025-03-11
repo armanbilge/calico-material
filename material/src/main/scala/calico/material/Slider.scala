@@ -17,7 +17,7 @@
 package calico.material
 
 import calico.html.Prop
-import cats.effect.{Async, IO}  
+import cats.effect.{Async, IO}
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
