@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
+
 package calico
 package material
 
+import calico.material.Slider
 import calico.html.io.{*, given}
 import calico.material.io.{*, given}
 
@@ -28,10 +30,20 @@ object Demo extends IOWebApp:
         cb.checked := true
       },
     ),
+
     mdOutlinedButton { b =>
       "Back"
     },
+    
     mdFilledButton { b =>
       "Next"
     },
+    label(
+      "Volume Control",
+      Slider.mdSlider { s =>
+        s.min := 0
+        s.max := 100
+        s.value := 50
+      },
+  )
   )

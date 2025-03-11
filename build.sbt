@@ -48,4 +48,15 @@ lazy val sandbox = project
       _.withModuleKind(ModuleKind.ESModule)
         .withModuleSplitStyle(ModuleSplitStyle.SmallModulesFor(List("calico.material")))
     },
+
+    Compile / scalaJSImportMap := { (s: String) =>
+  if (s.startsWith("@material/web"))
+    s.replace(
+      "@material/web",
+      "https://www.unpkg.com/@material/web@2.2.0/",
+    ) + "?module"
+  else
+    s
+}
+
   )
