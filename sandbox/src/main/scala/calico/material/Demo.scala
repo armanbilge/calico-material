@@ -43,4 +43,16 @@ object Demo extends IOWebApp:
         s.value := 50
       },
     ),
+    label(
+      "Enter Text",
+      TextField.mdTextField { tf =>
+        tf.value := "Hello, World!"
+      },
+    ),
+    label(
+      "Enable Feature",
+      Switch.mdSwitch { sw =>
+        sw.checked := false
+      },
+    ),
   )

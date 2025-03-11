@@ -22,19 +22,17 @@ import cats.effect.{Async, IO}
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
 
-opaque type Slider[F[_]] <: fs2.dom.HtmlElement[F] = fs2.dom.HtmlElement[F]
+opaque type TextField[F[_]] <: fs2.dom.HtmlElement[F] = fs2.dom.HtmlElement[F]
 
-object Slider extends MaterialSlider[IO]:
-  extension [F[_]](slider: Slider[F])
-    def value: Prop[F, Double, Double] = Prop("value", identity)
-    def min: Prop[F, Double, Double] = Prop("min", identity)
-    def max: Prop[F, Double, Double] = Prop("max", identity)
+object TextField extends MaterialTextField[IO]:
+  extension [F[_]](textField: TextField[F])
+    def value: Prop[F, String, String] = Prop("value", identity)
 
   @js.native
-  @JSImport("@material/web/slider/slider.js")
+  @JSImport("@material/web/textfield/outlined-text-field.js")
   private[material] def use: Any = js.native
 
-private trait MaterialSlider[F[_]](using F: Async[F]):
-  lazy val mdSlider: MdTag[F, Slider[F]] =
-    val _ = Slider.use
-    MdTag("md-slider")
+private trait MaterialTextField[F[_]](using F: Async[F]):
+  lazy val mdTextField: MdTag[F, TextField[F]] =
+    val _ = TextField.use
+    MdTag("md-outlined-text-field")

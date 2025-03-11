@@ -22,19 +22,17 @@ import cats.effect.{Async, IO}
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
 
-opaque type Slider[F[_]] <: fs2.dom.HtmlElement[F] = fs2.dom.HtmlElement[F]
+opaque type Switch[F[_]] <: fs2.dom.HtmlElement[F] = fs2.dom.HtmlElement[F]
 
-object Slider extends MaterialSlider[IO]:
-  extension [F[_]](slider: Slider[F])
-    def value: Prop[F, Double, Double] = Prop("value", identity)
-    def min: Prop[F, Double, Double] = Prop("min", identity)
-    def max: Prop[F, Double, Double] = Prop("max", identity)
+object Switch extends MaterialSwitch[IO]:
+  extension [F[_]](switch: Switch[F])
+    def checked: Prop[F, Boolean, Boolean] = Prop("checked", identity)
 
   @js.native
-  @JSImport("@material/web/slider/slider.js")
+  @JSImport("@material/web/switch/switch.js")
   private[material] def use: Any = js.native
 
-private trait MaterialSlider[F[_]](using F: Async[F]):
-  lazy val mdSlider: MdTag[F, Slider[F]] =
-    val _ = Slider.use
-    MdTag("md-slider")
+private trait MaterialSwitch[F[_]](using F: Async[F]):
+  lazy val mdSwitch: MdTag[F, Switch[F]] =
+    val _ = Switch.use
+    MdTag("md-switch")
