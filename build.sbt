@@ -7,13 +7,13 @@ ThisBuild / developers := List(
   tlGitHubDev("armanbilge", "Arman Bilge"),
 )
 
-ThisBuild / crossScalaVersions := Seq("3.3.1")
+ThisBuild / crossScalaVersions := Seq("3.3.5")
 ThisBuild / scalacOptions ++= Seq("-new-syntax", "-indent", "-source:future")
 
 ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec.temurin("21"))
 ThisBuild / tlJdkRelease := Some(8)
 
-val CalicoVersion = "0.2.2"
+val CalicoVersion = "0.2.3"
 
 lazy val root = tlCrossRootProject.aggregate(material, sandbox)
 
