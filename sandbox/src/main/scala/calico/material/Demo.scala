@@ -16,9 +16,12 @@
 
 package calico
 package material
+
 import cats.effect.IO
 import calico.html.io.{*, given}
 import calico.material.io.{*, given}
+import calico.material.Radio.mdRadio
+import cats.effect.IO.asyncForIO // Add this import
 
 object Demo extends IOWebApp:
   def render = div(
@@ -30,7 +33,7 @@ object Demo extends IOWebApp:
     ),
     label(
       "Select Option",
-      Radio.mdRadio { r =>
+      mdRadio { r =>
         r.checked := true
       },
     ),
