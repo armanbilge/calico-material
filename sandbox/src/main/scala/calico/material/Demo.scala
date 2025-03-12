@@ -19,19 +19,51 @@ package material
 
 import calico.html.io.{*, given}
 import calico.material.io.{*, given}
+import fs2.concurrent.SignallingRef
+import cats.effect.IO
+import cats.effect.Resource
+import scala.scalajs.js
+import org.scalajs.dom
 
 object Demo extends IOWebApp:
-  def render = div(
-    label(
-      "Material 3",
-      mdCheckbox { cb =>
-        cb.checked := true
-      },
-    ),
-    mdOutlinedButton { b =>
-      "Back"
-    },
-    mdFilledButton { b =>
-      "Next"
-    },
-  )
+  def render =
+    Resource.eval(SignallingRef[IO].of(false)).flatMap { isDialogOpen =>
+      div(
+        // Checkbox component
+        label(
+          "Material 3",
+          mdCheckbox { cb =>
+            cb.checked := true
+          },
+        ),
+
+        // Button components
+        div(
+          mdOutlinedButton { b =>
+            "Back"
+          },
+          mdFilledButton { b =>
+            "Next"
+          },
+        ),
+
+        // Icon Button component
+        div(
+          h3("Icon Button"),
+          mdIconButton { b =>
+            b.ariaLabel := "Favorite"
+            "❤️"
+          },
+        ),
+
+        // TextArea component
+        div(
+          h3("Text Area"),
+          mdTextArea { t =>
+            t.label := "Enter your text here"
+            t.required := true
+            t.value := "Default text"
+          },
+        ),
+      )
+    }

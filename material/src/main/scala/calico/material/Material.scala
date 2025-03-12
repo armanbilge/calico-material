@@ -21,4 +21,8 @@ import cats.effect.kernel.Async
 
 object io extends Material[IO]
 
-sealed class Material[F[_]](using Async[F]) extends MaterialButton[F], MaterialCheckbox[F]
+sealed class Material[F[_]](using Async[F])
+    extends MaterialButton[F]
+    with MaterialCheckbox[F]
+    with MaterialIconButton[F]
+    with MaterialTextArea[F]
