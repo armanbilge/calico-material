@@ -38,4 +38,3 @@ private trait MaterialTextArea[F[_]](using F: Async[F]):
   lazy val mdTextArea: MdTag[F, TextArea[F]] =
     val _ = TextArea.use
     MdTag("md-outlined-text-field")
-

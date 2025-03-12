@@ -48,7 +48,7 @@ private trait MaterialButton[F[_]](using F: Async[F]):
   lazy val mdOutlinedButton: MdTag[F, OutlinedButton[F]] =
     OutlinedButton.use
     MdTag("md-outlined-button")
-  
+
   lazy val mdButton: MdTag[F, Button[F]] =
     val _ = Button.use
     MdTag("md-button")
