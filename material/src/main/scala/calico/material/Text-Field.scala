@@ -17,22 +17,24 @@
 package calico.material
 
 import calico.html.Prop
-import cats.effect.{Async, IO}
-
+import cats.effect.kernel.Async
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
 
-opaque type TextField[F[_]] <: fs2.dom.HtmlElement[F] = fs2.dom.HtmlElement[F]
+opaque type TextArea[F[_]] <: fs2.dom.HtmlElement[F] = fs2.dom.HtmlElement[F]
 
-object TextField extends MaterialTextField[IO]:
-  extension [F[_]](textField: TextField[F])
+object TextArea:
+  extension [F[_]](textArea: TextArea[F])
+    def label: Prop[F, String, String] = Prop("label", identity)
+    def required: Prop[F, Boolean, Boolean] = Prop("required", identity)
+    def disabled: Prop[F, Boolean, Boolean] = Prop("disabled", identity)
     def value: Prop[F, String, String] = Prop("value", identity)
 
   @js.native
   @JSImport("@material/web/textfield/outlined-text-field.js")
   private[material] def use: Any = js.native
 
-private trait MaterialTextField[F[_]](using F: Async[F]):
-  lazy val mdTextField: MdTag[F, TextField[F]] =
-    val _ = TextField.use
+private trait MaterialTextArea[F[_]](using F: Async[F]):
+  lazy val mdTextArea: MdTag[F, TextArea[F]] =
+    val _ = TextArea.use
     MdTag("md-outlined-text-field")

@@ -17,18 +17,20 @@
 package calico.material
 
 import calico.html.Prop
-import cats.effect.{Async, IO}
-
+import cats.effect.kernel.Async
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
 
 opaque type Slider[F[_]] <: fs2.dom.HtmlElement[F] = fs2.dom.HtmlElement[F]
 
-object Slider extends MaterialSlider[IO]:
+object Slider:
   extension [F[_]](slider: Slider[F])
-    def value: Prop[F, Double, Double] = Prop("value", identity)
-    def min: Prop[F, Double, Double] = Prop("min", identity)
-    def max: Prop[F, Double, Double] = Prop("max", identity)
+    def value: Prop[F, Int, Int] = Prop("value", identity)
+    def min: Prop[F, Int, Int] = Prop("min", identity)
+    def max: Prop[F, Int, Int] = Prop("max", identity)
+    def step: Prop[F, Int, Int] = Prop("step", identity)
+    def disabled: Prop[F, Boolean, Boolean] = Prop("disabled", identity)
+    def labeled: Prop[F, Boolean, Boolean] = Prop("labeled", identity)
 
   @js.native
   @JSImport("@material/web/slider/slider.js")

@@ -17,16 +17,16 @@
 package calico.material
 
 import calico.html.Prop
-import cats.effect.{Async, IO}
-
+import cats.effect.kernel.Async
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
 
 opaque type Switch[F[_]] <: fs2.dom.HtmlElement[F] = fs2.dom.HtmlElement[F]
 
-object Switch extends MaterialSwitch[IO]:
+object Switch:
   extension [F[_]](switch: Switch[F])
     def checked: Prop[F, Boolean, Boolean] = Prop("checked", identity)
+    def disabled: Prop[F, Boolean, Boolean] = Prop("disabled", identity)
 
   @js.native
   @JSImport("@material/web/switch/switch.js")

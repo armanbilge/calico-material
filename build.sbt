@@ -4,7 +4,7 @@ ThisBuild / organization := "com.armanbilge"
 ThisBuild / organizationName := "Arman Bilge"
 ThisBuild / startYear := Some(2023)
 ThisBuild / developers := List(
-  tlGitHubDev("armanbilge", "Arman Bilge")
+  tlGitHubDev("armanbilge", "Arman Bilge"),
 )
 
 ThisBuild / crossScalaVersions := Seq("3.3.5")
@@ -15,8 +15,7 @@ ThisBuild / tlJdkRelease := Some(8)
 
 val CalicoVersion = "0.2.3"
 
-lazy val root =
-  tlCrossRootProject.aggregate(material, sandbox)
+lazy val root = tlCrossRootProject.aggregate(material, sandbox)
 
 lazy val material = project
   .in(file("material"))
@@ -24,8 +23,8 @@ lazy val material = project
   .settings(
     name := "calico-material",
     libraryDependencies ++= Seq(
-      "com.armanbilge" %%% "calico" % CalicoVersion
-    )
+      "com.armanbilge" %%% "calico" % CalicoVersion,
+    ),
   )
 
 lazy val sandbox = project
@@ -39,7 +38,7 @@ lazy val sandbox = project
       if (s.startsWith("@material/web"))
         s.replace(
           "@material/web",
-          "https://www.unpkg.com/@material/web@1.0.0-pre.16/"
+          "https://www.unpkg.com/@material/web@1.0.0-pre.16/",
         ) + "?module"
       else
         s
@@ -49,13 +48,4 @@ lazy val sandbox = project
       _.withModuleKind(ModuleKind.ESModule)
         .withModuleSplitStyle(ModuleSplitStyle.SmallModulesFor(List("calico.material")))
     },
-    Compile / scalaJSImportMap := { (s: String) =>
-      if (s.startsWith("@material/web"))
-        s.replace(
-          "@material/web",
-          "https://www.unpkg.com/@material/web@2.2.0/"
-        ) + "?module"
-      else
-        s
-    }
   )
