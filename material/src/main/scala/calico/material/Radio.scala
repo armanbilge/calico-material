@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package calico.material
 
 import calico.html.Prop
@@ -29,13 +28,9 @@ object Radio:
 
   @js.native
   @JSImport("@material/web/radio/radio.js")
-  private[material] def use: Any = js.native
+  private[material] object MaterialRadioJS extends js.Object
 
   def mdRadio[F[_]: Async]: MdTag[F, Radio[F]] =
-    val _ = use
-    MdTag("md-radio")
+    val _ = MaterialRadioJS
+    MdTag[F, Radio[F]]("md-radio")
 
-private trait MaterialRadio[F[_]](using F: Async[F]):
-  lazy val mdRadio: MdTag[F, Radio[F]] =
-    val _ = Radio.use
-    MdTag("md-radio")
