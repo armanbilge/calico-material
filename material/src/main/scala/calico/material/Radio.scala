@@ -33,4 +33,3 @@ object Radio:
   def mdRadio[F[_]: Async]: MdTag[F, Radio[F]] =
     val _ = MaterialRadioJS
     MdTag[F, Radio[F]]("md-radio")
-
