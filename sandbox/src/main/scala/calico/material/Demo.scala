@@ -22,28 +22,28 @@ import calico.material.io.{*, given}
 
 object Demo extends IOWebApp:
   def render = div(
-  label(
-    "Material 3",
-    mdCheckbox { cb =>
-      cb.checked := true
+    label(
+      "Material 3",
+      mdCheckbox { cb =>
+        cb.checked := true
+      },
+    ),
+    label(
+      "Select Option",
+      mdRadio { r => // Pass IO explicitly
+        r.checked := true
+      },
+    ),
+    label(
+      "Enter Text",
+      TextField.mdTextField[IO] { tf => // Pass IO explicitly
+        tf.value := "Hello"
+      },
+    ),
+    mdOutlinedButton { b =>
+      "Back"
     },
-  ),
-  label(
-    "Select Option",
-    mdRadio { r =>  // Pass IO explicitly
-      r.checked := true
+    mdFilledButton { b =>
+      "Next"
     },
-  ),
-  label(
-    "Enter Text",
-    TextField.mdTextField[IO] { tf =>  // Pass IO explicitly
-      tf.value := "Hello"
-    },
-  ),
-  mdOutlinedButton { b =>
-    "Back"
-  },
-  mdFilledButton { b =>
-    "Next"
-  }
-)
+  )
