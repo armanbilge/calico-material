@@ -18,6 +18,7 @@ package calico.material
 
 import calico.html.Prop
 import cats.effect.kernel.Async
+
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
 
@@ -29,8 +30,10 @@ object Radio:
 
   @js.native
   @JSImport("@material/web/radio/radio.js")
-  private[material] object MaterialRadioJS extends js.Object
+  private[material] def use: Any = js.native
 
-  def mdRadio[F[_]: Async]: MdTag[F, Radio[F]] =
-    val _ = MaterialRadioJS
-    MdTag[F, Radio[F]]("md-radio")
+private trait MaterialRadio[F[_]](using F: Async[F]):
+
+  lazy val mdRadio: MdTag[F, Radio[F]] =
+    Radio.use
+    MdTag("md-radio")
