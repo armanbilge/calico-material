@@ -16,7 +16,7 @@
 
 package calico
 package material
-
+import cats.effect.IO
 import calico.html.io.{*, given}
 import calico.material.io.{*, given}
 
@@ -26,6 +26,18 @@ object Demo extends IOWebApp:
       "Material 3",
       mdCheckbox { cb =>
         cb.checked := true
+      },
+    ),
+    label(
+      "Select Option",
+      mdRadio { r => // Pass IO explicitly
+        r.checked := true
+      },
+    ),
+    label(
+      "Enter Text",
+      TextField.mdTextField[IO] { tf => // Pass IO explicitly
+        tf.value := "Hello"
       },
     ),
     mdOutlinedButton { b =>

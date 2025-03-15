@@ -16,12 +16,24 @@
 
 package calico.material
 
-import cats.effect.IO
+import calico.html.Prop
 import cats.effect.kernel.Async
 
-object io extends Material[IO]
+import scala.scalajs.js
+import scala.scalajs.js.annotation.JSImport
 
-sealed class Material[F[_]](using Async[F])
-    extends MaterialButton[F],
-      MaterialCheckbox[F],
-      MaterialRadio[F]
+opaque type Radio[F[_]] <: fs2.dom.HtmlElement[F] = fs2.dom.HtmlElement[F]
+
+object Radio:
+  extension [F[_]](radio: Radio[F])
+    def checked: Prop[F, Boolean, Boolean] = Prop("checked", identity)
+
+  @js.native
+  @JSImport("@material/web/radio/radio.js")
+  private[material] def use: Any = js.native
+
+private trait MaterialRadio[F[_]](using F: Async[F]):
+
+  lazy val mdRadio: MdTag[F, Radio[F]] =
+    Radio.use
+    MdTag("md-radio")
