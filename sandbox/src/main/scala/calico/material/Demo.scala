@@ -19,19 +19,40 @@ package material
 
 import calico.html.io.{*, given}
 import calico.material.io.{*, given}
+import fs2.concurrent.SignallingRef
+import cats.effect.IO
+import cats.effect.Resource
+import scala.scalajs.js
+import org.scalajs.dom
 
 object Demo extends IOWebApp:
-  def render = div(
-    label(
-      "Material 3",
-      mdCheckbox { cb =>
-        cb.checked := true
-      },
-    ),
-    mdOutlinedButton { b =>
-      "Back"
-    },
-    mdFilledButton { b =>
-      "Next"
-    },
-  )
+  def render =
+    Resource.eval(SignallingRef[IO].of(false)).flatMap { isMenuOpen =>
+      div(
+        // Menu component
+
+        div(
+          h3("Menu Example"),
+          mdFilledButton { b =>
+            onClick(e =>
+              IO {
+                isMenuOpen.update(_ => true)
+              },
+            )
+            "Open Menu"
+          },
+          mdMenu { m =>
+            m.open <-- isMenuOpen
+
+            div(
+              mdMenuItem { mi =>
+                mi.headline := "Menu Item 1"
+              },
+              mdMenuItem { mi =>
+                mi.headline := "Menu Item 2"
+              },
+            )
+          },
+        ),
+      )
+    }

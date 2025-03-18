@@ -22,26 +22,33 @@ import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
 
 opaque type Button[F[_]] <: fs2.dom.HtmlElement[F] = fs2.dom.HtmlElement[F]
-object Button
+object Button:
+  @js.native
+  @JSImport("@material/web/button/text-button.js")
+  private[material] def _use: Any = js.native
 
 opaque type FilledButton[F[_]] <: Button[F] = Button[F]
 object FilledButton:
   @js.native
   @JSImport("@material/web/button/filled-button.js")
-  private[material] def use: Any = js.native
+  private[material] def _use: Any = js.native
 
 opaque type OutlinedButton[F[_]] <: Button[F] = Button[F]
 object OutlinedButton:
   @js.native
   @JSImport("@material/web/button/outlined-button.js")
-  private[material] def use: Any = js.native
+  private[material] def _use: Any = js.native
 
 private trait MaterialButton[F[_]](using F: Async[F]):
 
   lazy val mdFilledButton: MdTag[F, FilledButton[F]] =
-    FilledButton.use
+    FilledButton._use
     MdTag("md-filled-button")
 
   lazy val mdOutlinedButton: MdTag[F, OutlinedButton[F]] =
-    OutlinedButton.use
+    OutlinedButton._use
     MdTag("md-outlined-button")
+
+  lazy val mdButton: MdTag[F, Button[F]] =
+    Button._use
+    MdTag("md-button")
